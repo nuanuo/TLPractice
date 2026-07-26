@@ -42,8 +42,10 @@
             string input = Console.ReadLine() ?? string.Empty;
 
             if ( !string.IsNullOrEmpty( input ) )
+            {
                 return input;
-
+            }
+                
             Console.WriteLine( ErrorEmptyField );
         }
     }
@@ -56,7 +58,9 @@
             string input = Console.ReadLine() ?? string.Empty;
 
             if ( int.TryParse( input, out int result ) && result > 0 )
+            {
                 return result;
+            }    
 
             Console.WriteLine( ErrorInvalidNumber );
         }
