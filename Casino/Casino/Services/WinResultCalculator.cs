@@ -1,7 +1,7 @@
-﻿public class WinResultCalculator
+﻿public static class WinResultCalculator
 {
-    public int CalculateWinAmount( int bet, int randomNum, int multiplex )
+    public static int CalculateWinAmount( int bet, int randomNum, int multiplex, int luckyNumber )
     {
-        return bet * ( 1 + multiplex * ( randomNum % ( Gameplay.luckyNumber - 1 ) ) );
+        return bet * ( 1 + multiplex * ( randomNum % ( luckyNumber - 1 ) ) );
     }
 }

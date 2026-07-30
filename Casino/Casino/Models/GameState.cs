@@ -1,10 +1,41 @@
 ﻿public class GameState
 {
-    public int Balance { get; set; }
+    public int Balance { get; private set; }
     public int Multiplex { get; set; } = 2;
 
     public GameState( int initialBalance )
     {
+        if ( initialBalance < 0 )
+        {
+            throw new ArgumentException( Messages.NegativeInitialBalance );
+        }
+
         Balance = initialBalance;
+    }
+
+    public void AddWinnings( int amount )
+    {
+        if ( amount < 0 )
+        {
+            throw new ArgumentException( Messages.NegativeWinAmount );
+        }
+
+        Balance += amount;
+    }
+
+    public bool DeductBet( int amount )
+    {
+        if ( amount < 0 )
+        {
+            throw new ArgumentException( Messages.NegativeBetAmount );
+        }
+
+        Balance -= amount;
+        return true;
+    }
+
+    public bool HasSufficientFunds( int amount )
+    {
+        return Balance > 0 && amount <= Balance;
     }
 }

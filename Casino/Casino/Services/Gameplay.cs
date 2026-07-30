@@ -1,20 +1,25 @@
 ﻿public class Gameplay
 {
-    private readonly Random _random = new Random();
-    public const int luckyNumber = 18;
+    public const int luckyNumberMin = 18;
+    public const int luckyNumberMax = 20;
 
     public void GameIteration( GameState gameState )
     {
         if ( !HasSufficientFunds( gameState ) )
+        {
             return;
+        }
 
         int bet = GetValidBet( gameState.Balance );
-        int randomNum = GenerateRandomNumber();
+        int randomNum = NumberGenerator.Generate();
 
         DisplayNumber( randomNum );
         ProcessResult( gameState, bet, randomNum );
     }
-
+    private void DisplayNumber( int number )
+    {
+        Console.WriteLine( string.Format( Messages.NumberRolled, number ) );
+    }
     private bool HasSufficientFunds( GameState gameState )
     {
         if ( gameState.Balance <= 0 )
@@ -60,33 +65,18 @@
         }
     }
 
-    private int GenerateRandomNumber()
-    {
-        return _random.Next( 1, 21 );
-    }
-
-    private void DisplayNumber( int number )
-    {
-        Console.WriteLine( string.Format( Messages.NumberRolled, number ) );
-    }
-
     private void ProcessResult( GameState gameState, int bet, int randomNum )
     {
-        if ( randomNum >= luckyNumber )
+        if ( randomNum >= luckyNumberMin && randomNum <= luckyNumberMax )
         {
-            int winAmount = CalculateWinAmount( bet, randomNum, gameState.Multiplex );
-            gameState.Balance += winAmount;
+            int winAmount = WinResultCalculator.CalculateWinAmount( bet, randomNum, gameState.Multiplex, luckyNumberMin );
+            gameState.AddWinnings( winAmount );
             Console.WriteLine( string.Format( Messages.WinMessage, winAmount ) );
         }
         else
         {
-            gameState.Balance -= bet;
+            gameState.DeductBet( bet );
             Console.WriteLine( string.Format( Messages.LoseMessage, bet ) );
         }
-    }
-
-    private int CalculateWinAmount( int bet, int randomNum, int multiplex )
-    {
-        return bet * ( 1 + multiplex * ( randomNum % 17 ) );
     }
 }
