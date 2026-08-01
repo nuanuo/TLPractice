@@ -1,7 +1,7 @@
 ﻿public class GameState
 {
     public int Balance { get; private set; }
-    public int Multiplex { get; set; } = 2;
+    public const int multiplex = 2;
 
     public GameState( int initialBalance )
     {
@@ -28,6 +28,12 @@
         if ( amount < 0 )
         {
             throw new ArgumentException( Messages.NegativeBetAmount );
+        }
+
+        if ( amount > Balance )
+        {
+            Console.WriteLine( string.Format( Messages.InsufficientFundsForBet, Balance, amount ) );
+            return false;
         }
 
         Balance -= amount;

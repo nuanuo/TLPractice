@@ -11,10 +11,12 @@
         {
             return string.Format( Messages.BetCannotExceedBalance, maxBalance );
         }
+
         if ( bet <= 0 )
         {
             return Messages.BetMustBePositive;
         }
+
         return string.Empty;
     }
 }

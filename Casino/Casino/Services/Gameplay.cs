@@ -27,6 +27,7 @@
             Console.WriteLine( Messages.InsufficientFunds );
             return false;
         }
+
         return true;
     }
 
@@ -69,7 +70,7 @@
     {
         if ( randomNum >= luckyNumberMin && randomNum <= luckyNumberMax )
         {
-            int winAmount = WinResultCalculator.CalculateWinAmount( bet, randomNum, gameState.Multiplex, luckyNumberMin );
+            int winAmount = WinResultCalculator.CalculateWinAmount( bet, randomNum, GameState.multiplex, luckyNumberMin );
             gameState.AddWinnings( winAmount );
             Console.WriteLine( string.Format( Messages.WinMessage, winAmount ) );
         }

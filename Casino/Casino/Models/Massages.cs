@@ -34,9 +34,11 @@
     public const string NegativeInitialBalance = "Начальный баланс не может быть отрицательным!";
     public const string NegativeWinAmount = "Сумма выигрыша не может быть отрицательной!";
     public const string NegativeBetAmount = "Ставка не может быть отрицательной!";
+    public const string InsufficientFundsForBet = "Недостаточно средств для списания ставки! Баланс: {0}, ставка: {1}";
 
 
     public const string EnterNumber = "Ошибка: введите число!";
     public const string EnterPositiveNumber = "Ошибка: введите положительное целое число!";
     public const string EnterCommand = "Ошибка: введите команду!";
+
 }
