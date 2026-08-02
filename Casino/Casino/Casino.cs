@@ -2,7 +2,7 @@
 {
     static void Main()
     {
-        CasinoGame casino = new CasinoGame();
+        CasinoGame casino = new();
         casino.Start();
     }
 }

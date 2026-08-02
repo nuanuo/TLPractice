@@ -23,7 +23,7 @@
         Balance += amount;
     }
 
-    public bool DeductBet( int amount )
+    public void DeductBet( int amount )
     {
         if ( amount < 0 )
         {
@@ -32,12 +32,10 @@
 
         if ( amount > Balance )
         {
-            Console.WriteLine( string.Format( Messages.InsufficientFundsForBet, Balance, amount ) );
-            return false;
+            throw new ArgumentException( string.Format( Messages.InsufficientFundsForBet, Balance, amount ) );
         }
 
         Balance -= amount;
-        return true;
     }
 
     public bool HasSufficientFunds( int amount )
