@@ -5,7 +5,7 @@
 
     public const string EnterName = "Введите имя персонажа:";
     public const string SelectRace = "Выберите расу:";
-    public const string SelectClass = "Выберите класс:";
+    public const string SelectCaste = "Выберите класс:";
     public const string SelectWeapon = "Выберите оружие:";
     public const string SelectArmor = "Выберите броню:";
     public const string InvalidChoice = "Неверный выбор. Попробуйте снова.";

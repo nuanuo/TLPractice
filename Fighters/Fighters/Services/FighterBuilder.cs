@@ -27,29 +27,47 @@
         }
     }
 
-    private IRace SelectRace()
+    private static readonly List<IRace> Races = new List<IRace>
     {
-        var races = new List<IRace> { new Human(), new Dwarf(), new Elf(), new Hobbit(), new Orc(), new Troll() };
-        return SelectItem( races, Messages.SelectRace );
-    }
+        new Human(),
+        new Dwarf(),
+        new Elf(),
+        new Hobbit(),
+        new Orc(),
+        new Troll()
+    };
 
-    private ICaste SelectCaste()
+    private static readonly List<ICaste> Castes = new List<ICaste>
     {
-        var castes = new List<ICaste> { new Mercenary(), new Archer(), new Assassin(), new Knight() };
-        return SelectItem( castes, Messages.SelectClass );
-    }
+        new Knight(),
+        new Archer(),
+        new Mercenary(),
+        new Assassin()
+    };
 
-    private IWeapon SelectWeapon()
+    private static readonly List<IWeapon> Weapons = new List<IWeapon>
     {
-        var weapons = new List<IWeapon> { new BattleAxe(), new ButterflyBlade(), new ElvenBow(), new TwoHandedHammer(), new WizardsStaff() };
-        return SelectItem( weapons, Messages.SelectWeapon );
-    }
+        new ElvenBow(),
+        new TwoHandedHammer(),
+        new ButterflyBlade(),
+        new BattleAxe(),
+        new WizardsStaff()
+    };
 
-    private IArmor SelectArmor()
+    private static readonly List<IArmor> Armors = new List<IArmor>
     {
-        var armors = new List<IArmor> { new NoArmor(), new BoneArmor(), new DragonScale(), new ElvenCloak(), new IronChainmail(), new LeafChainmail() };
-        return SelectItem( armors, Messages.SelectArmor );
-    }
+        new NoArmor(),
+        new LeafChainmail(),
+        new DragonScale(),
+        new BoneArmor(),
+        new ElvenCloak(),
+        new IronChainmail()
+    };
+
+    private IRace SelectRace() => SelectItem( Races, Messages.SelectRace );
+    private ICaste SelectCaste() => SelectItem( Castes, Messages.SelectCaste );
+    private IWeapon SelectWeapon() => SelectItem( Weapons, Messages.SelectWeapon );
+    private IArmor SelectArmor() => SelectItem( Armors, Messages.SelectArmor );
 
     private T SelectItem<T>( List<T> items, string prompt ) where T : class
     {
