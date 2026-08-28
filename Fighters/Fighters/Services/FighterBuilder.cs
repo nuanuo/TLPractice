@@ -1,32 +1,5 @@
 ﻿public class FighterBuilder
 {
-    public Fighter CreateFighter()
-    {
-        string name = GetValidName();
-        IRace race = SelectRace();
-        ICaste caste = SelectCaste();
-        IWeapon weapon = SelectWeapon();
-        IArmor armor = SelectArmor();
-
-        return new Fighter( name, race, caste, weapon, armor );
-    }
-
-    private string GetValidName()
-    {
-        while ( true )
-        {
-            Console.WriteLine( Messages.EnterName );
-            string input = Console.ReadLine() ?? string.Empty;
-
-            if ( !string.IsNullOrWhiteSpace( input ) )
-            {
-                return input;
-            }
-
-            Console.WriteLine( Messages.NameRequired );
-        }
-    }
-
     private static readonly List<IRace> Races = new List<IRace>
     {
         new Human(),
@@ -63,6 +36,33 @@
         new ElvenCloak(),
         new IronChainmail()
     };
+
+    public Fighter CreateFighter()
+    {
+        string name = GetValidName();
+        IRace race = SelectRace();
+        ICaste caste = SelectCaste();
+        IWeapon weapon = SelectWeapon();
+        IArmor armor = SelectArmor();
+
+        return new Fighter( name, race, caste, weapon, armor );
+    }
+
+    private string GetValidName()
+    {
+        while ( true )
+        {
+            Console.WriteLine( Messages.EnterName );
+            string input = Console.ReadLine() ?? string.Empty;
+
+            if ( !string.IsNullOrWhiteSpace( input ) )
+            {
+                return input;
+            }
+
+            Console.WriteLine( Messages.NameRequired );
+        }
+    }
 
     private IRace SelectRace() => SelectItem( Races, Messages.SelectRace );
     private ICaste SelectCaste() => SelectItem( Castes, Messages.SelectCaste );

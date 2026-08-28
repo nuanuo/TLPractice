@@ -1,7 +1,19 @@
 ﻿public class BattleManager
 {
-    public void StartBattle( IFighter fighter1, IFighter fighter2 )
+    private readonly FighterBuilder _builder = new FighterBuilder();
+
+    public void StartBattle()
     {
+        Console.WriteLine( Messages.Welcome );
+
+        Console.WriteLine( "\nСоздание первого бойца:" );
+        IFighter fighter1 = _builder.CreateFighter();
+
+        Console.WriteLine( "\nСоздание второго бойца:" );
+        IFighter fighter2 = _builder.CreateFighter();
+
+        Console.WriteLine( "\nНачало битвы!" );
+
         int round = 1;
         Console.WriteLine( Messages.BattleStart );
 
@@ -10,7 +22,7 @@
             Console.WriteLine( string.Format( Messages.Round, round ) );
 
             int damage1 = fighter1.Attack();
-            int actualDamage1 = Math.Max( 0, damage1 - fighter2.Protection );
+            int actualDamage1 = CalculateActualDamage( damage1, fighter2.Protection );
             fighter2.TakeDamage( actualDamage1 );
             Console.WriteLine( string.Format( Messages.AttackMessage, fighter1.Name, actualDamage1, fighter2.Name ) );
 
@@ -22,7 +34,7 @@
             }
 
             int damage2 = fighter2.Attack();
-            int actualDamage2 = Math.Max( 0, damage2 - fighter1.Protection );
+            int actualDamage2 = CalculateActualDamage( damage2, fighter1.Protection );
             fighter1.TakeDamage( actualDamage2 );
             Console.WriteLine( string.Format( Messages.AttackMessage, fighter2.Name, actualDamage2, fighter1.Name ) );
 
@@ -35,5 +47,15 @@
 
             round++;
         }
+
+        if ( !fighter1.IsAlive && !fighter2.IsAlive )
+        {
+            Console.WriteLine( Messages.Draw );
+        }
+    }
+
+    private int CalculateActualDamage( int damage, int protection )
+    {
+        return Math.Max( 1, damage - protection );
     }
 }
